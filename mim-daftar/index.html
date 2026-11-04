@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="tg">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#2B52C4">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="МИМ Дафтар">
+  <title>МИМ Дафтар</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ============ Screen 1: database not connected yet (only you see this) ============ -->
+  <section id="screen-setup" class="screen-center" hidden>
+    <div class="login-card">
+      <div class="logo-big" aria-hidden="true"><span class="napkin big"></span></div>
+      <h1>МИМ Дафтар</h1>
+      <h2 data-i18n="setup_title"></h2>
+      <p data-i18n="setup_text"></p>
+      <div class="lang" role="group" aria-label="Забон / Язык">
+        <button type="button" data-act="lang" data-lang="tj">Тоҷикӣ</button>
+        <button type="button" data-act="lang" data-lang="ru">Русский</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Screen 2: login ============ -->
+  <section id="screen-login" class="screen-center" hidden>
+    <div class="login-card">
+      <div class="logo-big" aria-hidden="true"><span class="napkin big"></span></div>
+      <h1>МИМ Дафтар</h1>
+      <p data-i18n="login_sub"></p>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="login-email" data-i18n="email"></label>
+          <input id="login-email" type="email" autocomplete="username" inputmode="email" autocapitalize="off"
+            spellcheck="false" required>
+        </div>
+        <div class="field">
+          <label for="login-pass" data-i18n="password"></label>
+          <input id="login-pass" type="password" autocomplete="current-password" required>
+        </div>
+        <p class="err" id="login-err" role="alert"></p>
+        <button type="submit" class="btn primary big" id="login-btn" data-i18n="login_btn"></button>
+      </form>
+      <p class="help" data-i18n="login_internet"></p>
+      <div class="lang" role="group" aria-label="Забон / Язык">
+        <button type="button" data-act="lang" data-lang="tj">Тоҷикӣ</button>
+        <button type="button" data-act="lang" data-lang="ru">Русский</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Screen 3: the app ============ -->
+  <div id="screen-app" class="app" hidden>
+    <header class="top">
+      <div class="brand">
+        <span class="napkin" aria-hidden="true"></span>
+        <div class="brand-text"><b>МИМ Дафтар</b><small id="sync-line" data-i18n="tagline"></small></div>
+      </div>
+      <div class="lang small" role="group" aria-label="Забон / Язык">
+        <button type="button" data-act="lang" data-lang="tj">ТҶ</button>
+        <button type="button" data-act="lang" data-lang="ru">РУ</button>
+      </div>
+      <button type="button" class="icon-btn" data-act="settings" id="btn-settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" />
+        </svg>
+      </button>
+    </header>
+    <nav class="tabs" id="tabs" aria-label="Menu"></nav>
+    <div id="banner"></div>
+    <main id="view"></main>
+  </div>
+
+  <!-- Pop-up sheet for forms -->
+  <div class="sheet-wrap" id="sheet" hidden>
+    <div class="scrim" data-act="close"></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <div class="sheet-head">
+        <h2 id="sheet-title"></h2>
+        <button type="button" class="icon-btn" data-act="close" aria-label="×">✕</button>
+      </div>
+      <div id="sheet-body"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <!-- Order matters: library → settings → texts → database → app -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
